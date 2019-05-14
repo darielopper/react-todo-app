@@ -5,7 +5,9 @@ exports[`App component should mount correctly 1`] = `ReactWrapper {}`;
 exports[`App component should render correctly 1`] = `
 initialize {
   "0": Object {
-    "attribs": Object {},
+    "attribs": Object {
+      "class": "container",
+    },
     "children": Array [
       Object {
         "attribs": Object {},
@@ -20,12 +22,82 @@ initialize {
         ],
         "name": "h1",
         "namespace": "http://www.w3.org/1999/xhtml",
-        "next": null,
+        "next": Object {
+          "attribs": Object {
+            "class": "btn btn-info",
+          },
+          "children": Array [
+            Object {
+              "data": "Okey",
+              "next": null,
+              "parent": [Circular],
+              "prev": null,
+              "type": "text",
+            },
+          ],
+          "name": "button",
+          "namespace": "http://www.w3.org/1999/xhtml",
+          "next": null,
+          "parent": [Circular],
+          "prev": [Circular],
+          "type": "tag",
+          "x-attribsNamespace": Object {
+            "class": undefined,
+          },
+          "x-attribsPrefix": Object {
+            "class": undefined,
+          },
+        },
         "parent": [Circular],
         "prev": null,
         "type": "tag",
         "x-attribsNamespace": Object {},
         "x-attribsPrefix": Object {},
+      },
+      Object {
+        "attribs": Object {
+          "class": "btn btn-info",
+        },
+        "children": Array [
+          Object {
+            "data": "Okey",
+            "next": null,
+            "parent": [Circular],
+            "prev": null,
+            "type": "text",
+          },
+        ],
+        "name": "button",
+        "namespace": "http://www.w3.org/1999/xhtml",
+        "next": null,
+        "parent": [Circular],
+        "prev": Object {
+          "attribs": Object {},
+          "children": Array [
+            Object {
+              "data": "Hello World, from React App!!",
+              "next": null,
+              "parent": [Circular],
+              "prev": null,
+              "type": "text",
+            },
+          ],
+          "name": "h1",
+          "namespace": "http://www.w3.org/1999/xhtml",
+          "next": [Circular],
+          "parent": [Circular],
+          "prev": null,
+          "type": "tag",
+          "x-attribsNamespace": Object {},
+          "x-attribsPrefix": Object {},
+        },
+        "type": "tag",
+        "x-attribsNamespace": Object {
+          "class": undefined,
+        },
+        "x-attribsPrefix": Object {
+          "class": undefined,
+        },
       },
     ],
     "name": "div",
@@ -48,8 +120,12 @@ initialize {
       "x-attribsPrefix": Object {},
     },
     "type": "tag",
-    "x-attribsNamespace": Object {},
-    "x-attribsPrefix": Object {},
+    "x-attribsNamespace": Object {
+      "class": undefined,
+    },
+    "x-attribsPrefix": Object {
+      "class": undefined,
+    },
   },
   "_root": [Circular],
   "length": 1,

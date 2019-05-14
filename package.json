@@ -1,7 +1,7 @@
 {
-  "name": "react-boilerplate",
+  "name": "react-todo-app",
   "version": "1.0.0",
-  "description": "Initial react js project",
+  "description": "Initial react js ToDo app",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --mode development --open --hot",

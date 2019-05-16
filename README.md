@@ -2,7 +2,7 @@
 Simple **ToDo** example made with **ReactJs** + **Webpack** + **Jest** + **Enzyme** + **Bootstrap 4**
 
 # Start:
-git clone https://github.com/dramosv90/react-todo-app.git
+- git clone https://github.com/dramosv90/react-todo-app.git
 
 `With NPM:`
 

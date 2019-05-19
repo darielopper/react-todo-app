@@ -11,6 +11,7 @@ class TodoItem extends React.Component {
         this.handleChange = this.handleChange.bind(this)
         this.handleEdit = this.handleEdit.bind(this)
         this.handleKeyPress = this.handleKeyPress.bind(this)
+        this.handleBlur = this.handleBlur.bind(this)
     }
 
     handleClick() {
@@ -46,6 +47,10 @@ class TodoItem extends React.Component {
         }
     }
 
+    handleBlur() {
+        this.setState({ editMode: false })
+    }
+
     render() {
         const squareColor = this.props.color ? this.props.color : { done: '#28a745', default: '#ccc' }
         const icon = this.state.done ? faCheckSquare : faSquare
@@ -71,7 +76,8 @@ class TodoItem extends React.Component {
                 : (<div>
                     <input type="text" className="form-control form-control-sm"
                         value={this.state.newVal} onChange={this.handleChange} autoFocus
-                        onKeyDown={this.handleKeyPress} />
+                        onKeyDown={this.handleKeyPress} onBlur={this.handleBlur}
+                        title="Press Esc key to disscard or Enter to accept changes" />
                 </div>)
         )
     }

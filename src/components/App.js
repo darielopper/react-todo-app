@@ -1,6 +1,6 @@
 import React from "react"
 import { library } from "@fortawesome/fontawesome-svg-core"
-import { faCode, faHome } from "@fortawesome/free-solid-svg-icons"
+import { faCode, faHome, faEdit, faClock } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import TodoItem from "./TodoItem"
 import { initClassHandler } from "../utils"
@@ -50,7 +50,9 @@ class App extends React.Component {
                     <div className="card-body">
                         <h5 className="card-title">Card title</h5>
                         <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <h6 className="card-subtitle text-muted float-right">Updated 2 min ago</h6>
+                        <h6 className="card-subtitle text-muted float-right">
+                            <FontAwesomeIcon icon={faClock} /> 2 min ago
+                        </h6>
                     </div>
                     <div className="card-footer">
                         <a href="#" className={addTaskClassName} onClick={this.addTask}>Add Task</a>

@@ -5,10 +5,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 class TodoItem extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { done: false, title: props.title }
+        this.state = { done: false, title: props.title, editMode: false, newVal: props.title }
 
         this.handleClick = this.handleClick.bind(this)
         this.handleChange = this.handleChange.bind(this)
+        this.handleEdit = this.handleEdit.bind(this)
+        this.handleKeyPress = this.handleKeyPress.bind(this)
     }
 
     handleClick() {
@@ -23,7 +25,25 @@ class TodoItem extends React.Component {
     }
 
     handleChange(event) {
-        this.setState({ title: event.target.value })
+        this.setState({ newVal: event.target.value })
+    }
+
+    handleEdit() {
+        this.setState({ editMode: true })
+    }
+
+    handleKeyPress(event) {
+        //KeyCode 27 is Esc key and 13 Enter
+        if (event.keyCode === 27) {
+            this.setState({ editMode: false })
+        } else if (event.keyCode === 13) {
+            this.setState(state => {
+                return {
+                    editMode: false,
+                    title: state.newVal
+                }
+            })
+        }
     }
 
     render() {
@@ -31,20 +51,28 @@ class TodoItem extends React.Component {
         const icon = this.state.done ? faCheckSquare : faSquare
         const color = this.state.done ? squareColor.done : squareColor.default
         const hasToStrike = this.state.done && this.props.strikeIt
+        const { editMode, title } = this.state
         return (
-            <div className="todo-item">
-                <FontAwesomeIcon icon={icon} color={color}
-                    style={{ marginRight: 5 }} onClick={this.handleClick}></FontAwesomeIcon>
-                {hasToStrike
-                    ? (<strike onClick={this.handleClick}>{this.props.title}</strike>)
-                    : (<span onClick={this.handleClick}>{this.props.title}</span>)
-                }
-                <button className="btn btn-secondary btn-sm float-right"><FontAwesomeIcon icon={faPen}></FontAwesomeIcon></button>
-            </div>
-            /*<div>
-                <input type="text" className="form-control form-control-sm"
-                    value={this.state.title} onChange={this.handleChange} />
-            </div>*/
+            !editMode
+                ? (<div className="todo-item row">
+                    <div className="col-md-10">
+                        <FontAwesomeIcon icon={icon} color={color}
+                            style={{ marginRight: 5 }} onClick={this.handleClick}></FontAwesomeIcon>
+                        {hasToStrike
+                            ? (<strike onClick={this.handleClick}>{title}</strike>)
+                            : (<span onClick={this.handleClick}>{title}</span>)
+                        }
+                    </div>
+                    <div className="col-md-2">
+                        <button className="btn btn-secondary btn-sm float-right"
+                            onClick={this.handleEdit}><FontAwesomeIcon icon={faPen}></FontAwesomeIcon></button>
+                    </div>
+                </div>)
+                : (<div>
+                    <input type="text" className="form-control form-control-sm"
+                        value={this.state.newVal} onChange={this.handleChange} autoFocus
+                        onKeyDown={this.handleKeyPress} />
+                </div>)
         )
     }
 }

@@ -3,7 +3,7 @@ import { library } from "@fortawesome/fontawesome-svg-core"
 import { faCode, faHome, faEdit, faClock } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import TodoItem from "./TodoItem"
-import { initClassHandler } from "../utils"
+import { initClassHandler, timeAgoValue } from "../utils"
 
 library.add(faCode, faHome)
 
@@ -12,15 +12,23 @@ class App extends React.Component {
         super(props)
         this.state = {
             addTaskClassName: "btn btn-sm btn-success",
-            cardCss: "card bg-default animated bounceIn mt-5"
+            cardCss: "card bg-default animated bounceIn mt-5",
+            diff: 0
         }
 
         this.addTask = this.addTask.bind(this)
         this.removeCard = this.removeCard.bind(this)
+        this.startEllapsed = this.startEllapsed.bind(this)
     }
 
     componentWillMount() {
         initClassHandler()
+        this.initTime = new Date()
+        this.startEllapsed()
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.intervalId)
     }
 
     addTask() {
@@ -37,21 +45,33 @@ class App extends React.Component {
         })
     }
 
+    startEllapsed() {
+        this.intervalId = setInterval(() => {
+            this.setState(state => {
+                return { diff: timeAgoValue(this.initTime) }
+            })
+        }, 60000);
+    }
+
     render() {
-        const { cardCss, addTaskClassName } = this.state
+        const { cardCss, addTaskClassName, diff } = this.state
+        const timeEllapsed = !diff ? 'Recently' : diff + ' min ago'
         return (
             <div className="container">
                 <h1>Hello World, from React App!!</h1>
                 <button className="btn btn-info"><FontAwesomeIcon icon="home" /> Okey</button>
                 <br />
-                <TodoItem title="Probando un todoItem" strikeIt={true} color={{ done: '#ed1c24', default: '#ccc' }} />
-
+                <br />
                 <div className={cardCss} style={{ width: 300 }}>
                     <div className="card-body">
                         <h5 className="card-title">Card title</h5>
-                        <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <h6 className="card-subtitle text-muted float-right">
-                            <FontAwesomeIcon icon={faClock} /> 2 min ago
+                        <div className="card-text">
+                            <TodoItem title="Probando un todoItem"
+                                strikeIt={true} color={{ done: '#ed1c24', default: '#ccc' }}
+                                onChanged={(val) => console.log(val)} />
+                        </div>
+                        <h6 className="card-subtitle text-muted float-right mt-4">
+                            <FontAwesomeIcon icon={faClock} /> {timeEllapsed}
                         </h6>
                     </div>
                     <div className="card-footer">
@@ -59,7 +79,6 @@ class App extends React.Component {
                         <a href="#" className="btn btn-sm btn-danger float-right" onClick={this.removeCard}>Remove</a>
                     </div>
                 </div>
-                <pre>{this.state.addTaskClassName}</pre>
             </div>
         )
     }

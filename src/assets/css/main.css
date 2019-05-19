@@ -1,3 +1,7 @@
 .todo-item {
     cursor: pointer
 }
+
+.todo-item > * {
+    vertical-align: middle
+}

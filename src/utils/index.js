@@ -24,4 +24,8 @@ const initClassHandler = () => {
     }
 }
 
-export { initClassHandler }
+const timeAgoValue = (start) => {
+    return Math.ceil((new Date().getTime() - start.getTime()) / 60000) - 1
+}
+
+export { initClassHandler, timeAgoValue }

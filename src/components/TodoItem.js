@@ -41,7 +41,8 @@ class TodoItem extends React.Component {
             this.setState(state => {
                 return {
                     editMode: false,
-                    title: state.newVal
+                    //Just edit if newVal has real value without no empty spaces
+                    title: (state.newVal.trim().length) ? state.newVal : state.title
                 }
             })
         }

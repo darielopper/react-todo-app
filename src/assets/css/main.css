@@ -2,6 +2,8 @@
     cursor: pointer
 }
 
-.todo-item > * {
+.todo-item span,
+.todo-item strike,
+.todo-item svg {
     vertical-align: middle
 }

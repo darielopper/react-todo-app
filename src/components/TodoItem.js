@@ -21,11 +21,12 @@ class TodoItem extends React.Component {
     render() {
         const icon = this.state.done ? faCheckSquare : faSquare
         const color = this.state.done ? '#28a745' : '#ccc'
+        const hasToStrike = this.state.done && this.props.strikeIt
         return (
-            <span onClick={this.handleClick} className="todo-item">
+            <div onClick={this.handleClick} className="todo-item">
                 <FontAwesomeIcon icon={icon} color={color} style={{ marginRight: 5 }}></FontAwesomeIcon>
-                {this.props.title}
-            </span>
+                {hasToStrike ? (<strike>{this.props.title}</strike>) : (<span>{this.props.title}</span>)}
+            </div>
         )
     }
 }

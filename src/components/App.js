@@ -11,7 +11,7 @@ const App = () => (
         <h1>Hello World, from React App!!</h1>
         <button className="btn btn-info"><FontAwesomeIcon icon="home" /> Okey</button>
         <br />
-        <TodoItem title="Probando un todoItem" strikeIt={true} />
+        <TodoItem title="Probando un todoItem" strikeIt={true} color={{ done: '#ed1c24', default: '#ccc' }} />
     </div>
 )
 

@@ -19,8 +19,9 @@ class TodoItem extends React.Component {
     }
 
     render() {
+        const squareColor = this.props.color ? this.props.color : { done: '#28a745', default: '#ccc' }
         const icon = this.state.done ? faCheckSquare : faSquare
-        const color = this.state.done ? '#28a745' : '#ccc'
+        const color = this.state.done ? squareColor.done : squareColor.default
         const hasToStrike = this.state.done && this.props.strikeIt
         return (
             <div onClick={this.handleClick} className="todo-item">

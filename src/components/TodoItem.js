@@ -20,10 +20,10 @@ class TodoItem extends React.Component {
 
     render() {
         const icon = this.state.done ? faCheckSquare : faSquare
-        const checkClass = this.state.done ? 'text-success' : ''
+        const color = this.state.done ? '#28a745' : '#ccc'
         return (
-            <span onClick={this.handleClick}>
-                <FontAwesomeIcon icon={icon} className={checkClass}></FontAwesomeIcon>
+            <span onClick={this.handleClick} className="todo-item">
+                <FontAwesomeIcon icon={icon} color={color} style={{ marginRight: 5 }}></FontAwesomeIcon>
                 {this.props.title}
             </span>
         )

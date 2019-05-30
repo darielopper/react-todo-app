@@ -22,9 +22,12 @@ class App extends React.Component {
     }
 
     componentWillMount() {
-        initClassHandler()
         this.initTime = new Date()
         this.startEllapsed()
+    }
+
+    componentWillMount() {
+        initClassHandler()
     }
 
     componentWillUnmount() {
@@ -33,14 +36,14 @@ class App extends React.Component {
 
     addTask() {
         this.setState(state => {
-            return { addTaskClassName: state.addTaskClassName.split(' ').replaceClass("btn-success", "btn-warning").toClass() }
+            return { addTaskClassName: state.addTaskClassName.replace("btn-success", "btn-warning") }
         })
     }
 
     removeCard() {
         this.setState(state => {
             return {
-                cardCss: state.cardCss.split(' ').replaceClass('bounceIn', 'bounceOut').toClass()
+                cardCss: state.cardCss.replace('bounceIn', 'bounceOut')
             }
         })
     }

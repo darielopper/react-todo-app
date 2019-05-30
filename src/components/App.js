@@ -3,6 +3,7 @@ import { library } from "@fortawesome/fontawesome-svg-core"
 import { faCode, faHome, faEdit, faClock } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import TodoItem from "./TodoItem"
+import Card from "./Card"
 import { initClassHandler, timeAgoValue } from "../utils"
 
 library.add(faCode, faHome)
@@ -82,6 +83,7 @@ class App extends React.Component {
                         <a href="#" className="btn btn-sm btn-danger float-right" onClick={this.removeCard}>Remove</a>
                     </div>
                 </div>
+                <Card />
             </div>
         )
     }

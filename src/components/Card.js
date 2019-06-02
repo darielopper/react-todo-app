@@ -17,7 +17,7 @@ class Card extends React.Component{
     addTask() {
         this.setState(state => {
             let newTasks = [...state.tasks]
-            newTasks.push({ title: 'New Task', strikeIt: true })
+            newTasks.push({ title: 'New Task', strikeIt: true, editMode: true })
             return {tasks: newTasks}
         })
     }
@@ -42,6 +42,7 @@ class Card extends React.Component{
                             tasks.map(item =>
                                 <TodoItem title={item.title}
                                     strikeIt={item.strikeIt}
+                                    editMode={!!item.editMode}
                                     onChanged={(val) => console.log(val)} />
                             )
                         )}

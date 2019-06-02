@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 class TodoItem extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { done: false, title: props.title, editMode: false, newVal: props.title }
+        this.state = { done: false, title: props.title, editMode: !!props.editMode, newVal: props.title }
 
         this.handleClick = this.handleClick.bind(this)
         this.handleChange = this.handleChange.bind(this)

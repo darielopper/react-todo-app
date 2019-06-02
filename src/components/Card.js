@@ -1,6 +1,7 @@
-import React from 'react'
+import React from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faClock } from "@fortawesome/free-solid-svg-icons"
+import TodoItem from "./TodoItem"
 const classnames = require('classnames')
 
 class Card extends React.Component{
@@ -25,18 +26,18 @@ class Card extends React.Component{
         return (
             <div className={classnames(cardCss)} style={{ width: 300 }}>
                 <div className="card-body">
-                    <h5 className="card-title">Card title</h5>
+                    <h5 className="card-title">{this.props.category}</h5>
                     <div className="card-text">
-                        {this.props.children}
+                        {this.hasAnyTask() && (
+                            this.props.tasks.map(item =>
+                                <TodoItem title={item.title}
+                                    strikeIt={item.strikeIt}
+                                    onChanged={(val) => console.log(val)} />
+                            )
+                        )}
                     </div>
                     <h6 className="card-subtitle text-muted float-right mt-4">
-                        {this.hasAnyTask() && (
-                            this.props.tasks.each(item => {
-                                <TodoItem title={item.title}
-                                    strikeIt={item.strikeIt} color={item.color}
-                                    onChanged={(val) => console.log(val)} />
-                            })
-                        )}
+
                     </h6>
                 </div>
                 <div className="card-footer">

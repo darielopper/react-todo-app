@@ -22,6 +22,15 @@ const initClassHandler = () => {
     Array.prototype.removeClass = function (className) {
         return this.remove(className)
     }
+
+    String.prototype.ucFirst = function () {
+        return this.substr(0,1).toUpperCase() + this.substr(1)
+    }
+
+    String.prototype.ucWords = function () {
+        const separator = this.indexOf(' ') > 0 ? ' ' : '_'
+        return this.split(separator).map(part => part.ucFirst()).join(' ')
+    }
 }
 
 const timeAgoValue = (start) => {

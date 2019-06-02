@@ -14,7 +14,12 @@ class App extends React.Component {
         this.state = {
             addTaskClassName: "btn btn-sm btn-success",
             cardCss: "card bg-default animated bounceIn mt-5",
-            diff: 0
+            diff: 0,
+            todo: {
+                compra_nueva: [
+                    {title: 'Detergente para lavar', strikeIt: true}
+                ]
+            }
         }
 
         this.addTask = this.addTask.bind(this)
@@ -60,6 +65,7 @@ class App extends React.Component {
     render() {
         const { cardCss, addTaskClassName, diff } = this.state
         const timeEllapsed = !diff ? 'Recently' : diff + ' min ago'
+        const todoData = this.state.todo
         return (
             <div className="container">
                 <h1>Hello World, from React App!!</h1>
@@ -83,7 +89,9 @@ class App extends React.Component {
                         <a href="#" className="btn btn-sm btn-danger float-right" onClick={this.removeCard}>Remove</a>
                     </div>
                 </div>
-                <Card />
+                {Object.keys(todoData).map(item =>
+                    <Card category={item.ucWords()} key={item} tasks={todoData[item]}/>
+                )}
             </div>
         )
     }

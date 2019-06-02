@@ -70,7 +70,7 @@ class TodoItem extends React.Component {
                         }
                     </div>
                     <div className="col-md-2">
-                        <button className="btn btn-secondary btn-sm float-right"
+                        <button className="btn btn-secondary btn-xs float-right"
                             onClick={this.handleEdit}><FontAwesomeIcon icon={faPen}></FontAwesomeIcon></button>
                     </div>
                 </div>)

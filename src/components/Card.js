@@ -8,8 +8,18 @@ class Card extends React.Component{
     constructor(props) {
         super(props)
         this.state = {
-            cardCss: ['card', 'bg-default', 'animated', 'bounceIn', 'mt-5']
+            cardCss: ['card', 'bg-default', 'animated', 'bounceIn', 'mt-5'],
+            tasks: props.tasks
         }
+        this.addTask = this.addTask.bind(this)
+    }
+
+    addTask() {
+        this.setState(state => {
+            let newTasks = [...state.tasks]
+            newTasks.push({ title: 'New Task', strikeIt: true })
+            return {tasks: newTasks}
+        })
     }
 
     removeCard() {
@@ -22,14 +32,14 @@ class Card extends React.Component{
 
     render() {
         const timeEllapsed = "Recently"
-        const {cardCss} = this.state
+        const {cardCss, tasks} = this.state
         return (
             <div className={classnames(cardCss)} style={{ width: 300 }}>
                 <div className="card-body">
                     <h5 className="card-title">{this.props.category}</h5>
                     <div className="card-text">
                         {this.hasAnyTask() && (
-                            this.props.tasks.map(item =>
+                            tasks.map(item =>
                                 <TodoItem title={item.title}
                                     strikeIt={item.strikeIt}
                                     onChanged={(val) => console.log(val)} />
@@ -41,8 +51,9 @@ class Card extends React.Component{
                     </h6>
                 </div>
                 <div className="card-footer">
-                    <a href="#" className={classnames('btn', 'btn-sm', 'btn-success')}>Add Task</a>
-                    <a href="#" className="btn btn-sm btn-danger float-right" onClick={() => this.removeCard}>Remove</a>
+                    <a href="javascript: void(0);" className={classnames('btn', 'btn-sm', 'btn-success')}
+                        onClick={this.addTask}>Add Task</a>
+                    <a href="javascript: void(0);" className="btn btn-sm btn-danger float-right" onClick={() => this.removeCard}>Remove</a>
                 </div>
             </div>
         )

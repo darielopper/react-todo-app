@@ -48,6 +48,10 @@ class TodoItem extends React.Component {
             this.setState({ editMode: false })
         } else if (event.keyCode === 13) {
             this.setState(state => {
+                if(!state.newVal.trim().length && typeof this.props.onRemove)
+                {
+                    this.props.onRemove()
+                }
                 return {
                     editMode: false,
                     //Just edit if newVal has real value without no empty spaces

@@ -11,32 +11,51 @@ class Card extends React.Component {
             cardCss: ['card', 'bg-default', 'animated', 'bounceIn', 'mt-5'],
             tasks: props.tasks
         }
+
         this.addTask = this.addTask.bind(this)
         this.removeCard = this.removeCard.bind(this)
+        this.removeTask = this.removeTask.bind(this)
     }
 
     addTask() {
         this.setState(state => {
             let newTasks = [...state.tasks]
             newTasks.push({ title: 'New Task', strikeIt: true, editMode: true })
+
             return { tasks: newTasks }
         })
     }
 
     removeCard() {
-        console.log('asd')
         this.setState(state => {
             const classAsText = state.cardCss.join(' ')
             const replaceClass = classAsText.replace('bounceIn', 'bounceOut')
+
             return { cardCss: replaceClass.split(' ') }
         })
+        if (typeof this.props.onRemove === 'function') {
+            this.props.onRemove()
+        }
+    }
+
+    removeTask(index) {
+        if (confirm('Are you sure you want delete this item?')) {
+            this.setState(state => {
+                let newTasks = state.tasks
+                newTasks.splice(index, 1)
+                console.log(newTasks)
+
+                return {tasks: newTasks}
+            })
+        }
     }
 
     hasAnyTask() {
-        return this.props.tasks && this.props.tasks.length
+        return this.state.tasks && !!this.state.tasks.length
     }
 
     render() {
+        const defaultColor = { done: '#1E1E1E', default: '#CCC' }
         const timeEllapsed = "Recently"
         const { cardCss, tasks } = this.state
         return (
@@ -49,7 +68,9 @@ class Card extends React.Component {
                                 <TodoItem title={item.title}
                                     strikeIt={item.strikeIt}
                                     editMode={!!item.editMode}
+                                    color={defaultColor}
                                     key={item + '_' + index}
+                                    onRemove={() => this.removeTask(index)}
                                     onChanged={(val) => console.log(val)} />
                             )
                         )}

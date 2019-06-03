@@ -17,7 +17,7 @@ class App extends React.Component {
             diff: 0,
             todo: {
                 compra_nueva: [
-                    {title: 'Detergente para lavar', strikeIt: true}
+                    { title: 'Detergente para lavar', strikeIt: true }
                 ]
             }
         }
@@ -46,12 +46,8 @@ class App extends React.Component {
         })
     }
 
-    removeCard() {
-        this.setState(state => {
-            return {
-                cardCss: state.cardCss.replace('bounceIn', 'bounceOut')
-            }
-        })
+    removeCard(id) {
+        alert('removing card: '+id)
     }
 
     startEllapsed() {
@@ -86,11 +82,12 @@ class App extends React.Component {
                     </div>
                     <div className="card-footer">
                         <a href="#" className={addTaskClassName} onClick={this.addTask}>Add Task</a>
-                        <a href="#" className="btn btn-sm btn-danger float-right" onClick={this.removeCard}>Remove</a>
+                        <a href="#" className="btn btn-sm btn-danger float-right">Remove</a>
                     </div>
                 </div>
                 {Object.keys(todoData).map(item =>
-                    <Card category={item.ucWords()} key={item} tasks={todoData[item]}/>
+                    <Card category={item.ucWords()} key={item}
+                        tasks={todoData[item]} onRemove={() => this.removeCard(item)} />
                 )}
             </div>
         )

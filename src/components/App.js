@@ -3,6 +3,7 @@ import { library } from "@fortawesome/fontawesome-svg-core"
 import { faCode, faHome, faEdit, faClock } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import TodoItem from "./TodoItem"
+import Modal from "./Modal"
 import { initClassHandler, timeAgoValue } from "../utils"
 
 library.add(faCode, faHome)
@@ -61,6 +62,7 @@ class App extends React.Component {
         const timeEllapsed = !diff ? 'Recently' : diff + ' min ago'
         return (
             <div className="container">
+                <Modal title="probando" show/>
                 <h1>Hello World, from React App!!</h1>
                 <button className="btn btn-info"><FontAwesomeIcon icon="home" /> Okey</button>
                 <br />

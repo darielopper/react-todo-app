@@ -7,3 +7,11 @@
 .todo-item svg {
     vertical-align: middle
 }
+
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
+}

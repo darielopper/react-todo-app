@@ -10,6 +10,7 @@ class Modal extends React.Component {
         okHidden: false,
         cancelHidden: true,
         show: false,
+        okHandler: () => {}
     }
 
     static propTypes = {
@@ -19,18 +20,30 @@ class Modal extends React.Component {
         cancelClass: propTypes.string,
         okHidden: propTypes.bool,
         cancelHidden: propTypes.bool,
-        show: propTypes.bool
+        show: propTypes.bool,
+        okHandler: propTypes.func
     }
 
     constructor(props) {
         super(props)
         this.state = {
-            show: this.props.show
+            show: this.props.show,
+            modalClass: 'modal show animated fadeIn'
         }
     }
 
+    okHandler = () => {
+        this.setState(state => {
+            setTimeout(() => {
+                this.setState({show: false})
+                this.props.okHandler()
+            }, 160)
+            return {modalClass: state.modalClass.replace('show', 'hide').replace('fadeIn', 'fadeOut')}
+        })
+    }
+
     render() {
-        const { show } = this.state
+        const { show, modalClass } = this.state
         const {
             footerSection: footer,
             headerSection: header,
@@ -57,13 +70,13 @@ class Modal extends React.Component {
                     {!cancelHidden && <button id="cancelButton" type="button" className={cancelClass} rel="prev">
                         {cancelText}
                     </button>}
-                    {!okHidden && <button id="okButton" type="button" className={okClass} rel="next">
+                    {!okHidden && <button id="okButton" type="button" className={okClass} rel="next" onClick={this.okHandler}>
                         {okText}
                     </button>}
                 </div>)
         return (
-            show && <div class="animated">
-                <div className="modal show animated fadeIn" role="dialog" tabIndex="-1" aria-hidden="true">
+            show && <div>
+                <div className={modalClass} role="dialog" tabIndex="-1" aria-hidden="true">
                     <div className="modal-dialog modal-dialog-centered" role="document" ref="dialog">
                         <div className="modal-content">
                             {headerSection}

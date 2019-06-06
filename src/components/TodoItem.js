@@ -1,4 +1,5 @@
 import React from "react"
+import propTypes from "prop-types"
 import { faSquare, faCheckSquare, faPen } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
@@ -11,11 +12,11 @@ class TodoItem extends React.Component {
     }
 
     static propTypes = {
-        color: React.propTypes.object,
-        title: React.propTypes.string,
-        editMode: React.propTypes.bool,
-        strikeIt: React.propTypes.bool,
-        onChanged: React.propTypes.func
+        color: propTypes.object,
+        title: propTypes.string,
+        editMode: propTypes.bool,
+        strikeIt: propTypes.bool,
+        onChanged: propTypes.func
     }
 
     constructor(props) {

@@ -1,10 +1,19 @@
 import React from "react"
+import propTypes from "prop-types"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faClock } from "@fortawesome/free-solid-svg-icons"
 import TodoItem from "./TodoItem"
 const classnames = require('classnames')
 
 class Card extends React.Component {
+    static defaultProps = {
+        onRemove: () => {}
+    }
+
+    static propTypes = {
+        onRemove: propTypes.func
+    }
+
     constructor(props) {
         super(props)
         this.state = {
@@ -33,9 +42,8 @@ class Card extends React.Component {
 
             return { cardCss: replaceClass.split(' ') }
         })
-        if (typeof this.props.onRemove === 'function') {
-            this.props.onRemove()
-        }
+
+        this.props.onRemove()
     }
 
     removeTask(index) {
@@ -43,7 +51,6 @@ class Card extends React.Component {
             this.setState(state => {
                 let newTasks = state.tasks
                 newTasks.splice(index, 1)
-                console.log(newTasks)
 
                 return {tasks: newTasks}
             })

@@ -3,6 +3,7 @@ import { library } from "@fortawesome/fontawesome-svg-core"
 import { faCode, faHome, faEdit, faClock } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import TodoItem from "./TodoItem"
+import Modal from "./Modal"
 import Card from "./Card"
 import { initClassHandler, timeAgoValue } from "../utils"
 
@@ -64,6 +65,9 @@ class App extends React.Component {
         const todoData = this.state.todo
         return (
             <div className="container">
+                <Modal title="probando" okHidden={false} show>
+                    <span>Esta seguro que desea cerrar la aplicacion?</span>
+                </Modal>
                 <h1>Hello World, from React App!!</h1>
                 <button className="btn btn-info"><FontAwesomeIcon icon="home" /> Okey</button>
                 <br />

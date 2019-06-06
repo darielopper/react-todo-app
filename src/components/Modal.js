@@ -30,7 +30,8 @@ class Modal extends React.Component {
         super(props)
         this.state = {
             show: this.props.show,
-            modalClass: 'modal show animated fadeIn'
+            modalClass: 'modal show animated fadeIn',
+            containerClass: 'animated'
         }
     }
 
@@ -45,15 +46,23 @@ class Modal extends React.Component {
     dismissModal = handler => {
         this.setState(state => {
             setTimeout(() => {
-                this.setState({ show: false })
+                this.setState({containerClass: 'animated fadeOut'})
                 handler()
-            }, 160)
+            }, 50)
             return { modalClass: state.modalClass.replace('show', 'hide').replace('fadeIn', 'fadeOut') }
         })
     }
 
+    componentDidUpdate() {
+        if(this.state.containerClass !== 'animated') {
+            setTimeout(() => {
+                this.setState({ show: false, containerClass: 'animated' })
+            }, 500)
+        }
+    }
+
     render() {
-        const { show, modalClass } = this.state
+        const { show, modalClass, containerClass } = this.state
         const {
             footerSection: footer,
             headerSection: header,
@@ -86,7 +95,7 @@ class Modal extends React.Component {
                 </button>}
             </div>)
         return (
-            show && <div>
+            show && <div class={containerClass}>
                 <div className={modalClass} role="dialog" tabIndex="-1" aria-hidden="true">
                     <div className="modal-dialog modal-dialog-centered" role="document" ref="dialog">
                         <div className="modal-content">

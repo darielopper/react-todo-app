@@ -3,6 +3,7 @@ import { library } from "@fortawesome/fontawesome-svg-core"
 import { faCode, faHome, faEdit, faClock } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import TodoItem from "./TodoItem"
+import Card from "./Card"
 import { initClassHandler, timeAgoValue } from "../utils"
 
 library.add(faCode, faHome)
@@ -13,7 +14,12 @@ class App extends React.Component {
         this.state = {
             addTaskClassName: "btn btn-sm btn-success",
             cardCss: "card bg-default animated bounceIn mt-5",
-            diff: 0
+            diff: 0,
+            todo: {
+                compra_nueva: [
+                    { title: 'Detergente para lavar', strikeIt: true }
+                ]
+            }
         }
 
         this.addTask = this.addTask.bind(this)
@@ -40,12 +46,8 @@ class App extends React.Component {
         })
     }
 
-    removeCard() {
-        this.setState(state => {
-            return {
-                cardCss: state.cardCss.replace('bounceIn', 'bounceOut')
-            }
-        })
+    removeCard(id) {
+        alert('removing card: '+id)
     }
 
     startEllapsed() {
@@ -59,6 +61,7 @@ class App extends React.Component {
     render() {
         const { cardCss, addTaskClassName, diff } = this.state
         const timeEllapsed = !diff ? 'Recently' : diff + ' min ago'
+        const todoData = this.state.todo
         return (
             <div className="container">
                 <h1>Hello World, from React App!!</h1>
@@ -79,9 +82,13 @@ class App extends React.Component {
                     </div>
                     <div className="card-footer">
                         <a href="#" className={addTaskClassName} onClick={this.addTask}>Add Task</a>
-                        <a href="#" className="btn btn-sm btn-danger float-right" onClick={this.removeCard}>Remove</a>
+                        <a href="#" className="btn btn-sm btn-danger float-right">Remove</a>
                     </div>
                 </div>
+                {Object.keys(todoData).map(item =>
+                    <Card category={item.ucWords()} key={item}
+                        tasks={todoData[item]} onRemove={() => this.removeCard(item)} />
+                )}
             </div>
         )
     }

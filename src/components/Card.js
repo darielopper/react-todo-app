@@ -7,11 +7,15 @@ const classnames = require('classnames')
 
 class Card extends React.Component {
     static defaultProps = {
-        onRemove: () => {}
+        onRemove: () => {},
+        category: 'None',
+        types: []
     }
 
     static propTypes = {
-        onRemove: propTypes.func
+        onRemove: propTypes.func,
+        category: propTypes.string,
+        tasks: propTypes.array
     }
 
     constructor(props) {

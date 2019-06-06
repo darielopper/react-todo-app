@@ -65,7 +65,9 @@ class App extends React.Component {
         const todoData = this.state.todo
         return (
             <div className="container">
-                <Modal title="probando" cancelHandler={() => alert('cerrando')} show/>
+                <Modal title="probando" okHidden={false} show>
+                    <span>Esta seguro que desea cerrar la aplicacion?</span>
+                </Modal>
                 <h1>Hello World, from React App!!</h1>
                 <button className="btn btn-info"><FontAwesomeIcon icon="home" /> Okey</button>
                 <br />

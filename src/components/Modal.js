@@ -1,4 +1,5 @@
 import React from "react"
+import propTypes from "prop-types"
 
 class Modal extends React.Component {
     static defaultProps = {
@@ -9,6 +10,16 @@ class Modal extends React.Component {
         okHidden: false,
         cancelHidden: true,
         show: false,
+    }
+
+    static propTypes = {
+        okText: propTypes.string,
+        cancelText: propTypes.string,
+        okClass: propTypes.string,
+        cancelClass: propTypes.string,
+        okHidden: propTypes.bool,
+        cancelHidden: propTypes.bool,
+        show: propTypes.bool
     }
 
     constructor(props) {

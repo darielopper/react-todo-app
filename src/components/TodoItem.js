@@ -3,6 +3,10 @@ import { faSquare, faCheckSquare, faPen } from "@fortawesome/free-solid-svg-icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 class TodoItem extends React.Component {
+    static defaultProps = {
+
+    }
+
     constructor(props) {
         super(props)
         this.state = { done: false, title: props.title, editMode: !!props.editMode, newVal: props.title }

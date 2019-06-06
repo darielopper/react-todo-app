@@ -2,6 +2,15 @@
     cursor: pointer
 }
 
+.todo-item:not(:nth-child(1)){
+    margin-top: 5px;
+}
+
+.form-control {
+    margin-top: 7px !important;
+    margin-bottom: 7px !important;
+}
+
 .todo-item span,
 .todo-item strike,
 .todo-item svg {
@@ -14,4 +23,12 @@
 
 .hide {
     display: none;
+}
+
+.btn-group-sm>.btn, .btn-xs {
+    padding: .25rem .3rem;
+    font-size: .75rem;
+    line-height: 1.0;
+    border-radius: .2rem;
+    margin-top: 2px;
 }

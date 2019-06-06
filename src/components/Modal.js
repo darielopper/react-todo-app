@@ -7,10 +7,11 @@ class Modal extends React.Component {
         cancelText: 'Cancel',
         okClass: 'btn btn-sm btn-success',
         cancelClass: 'btn btn-sm btn-danger',
-        okHidden: false,
-        cancelHidden: true,
+        okHidden: true,
+        cancelHidden: false,
         show: false,
-        okHandler: () => {}
+        okHandler: () => { },
+        cancelHandler: () => { },
     }
 
     static propTypes = {
@@ -21,7 +22,8 @@ class Modal extends React.Component {
         okHidden: propTypes.bool,
         cancelHidden: propTypes.bool,
         show: propTypes.bool,
-        okHandler: propTypes.func
+        okHandler: propTypes.func,
+        cancelHanler: propTypes.func,
     }
 
     constructor(props) {
@@ -33,12 +35,20 @@ class Modal extends React.Component {
     }
 
     okHandler = () => {
+        this.dismissModal(this.props.okHandler)
+    }
+
+    cancelHandler = () => {
+        this.dismissModal(this.props.cancelHandler)
+    }
+
+    dismissModal = handler => {
         this.setState(state => {
             setTimeout(() => {
-                this.setState({show: false})
-                this.props.okHandler()
+                this.setState({ show: false })
+                handler()
             }, 160)
-            return {modalClass: state.modalClass.replace('show', 'hide').replace('fadeIn', 'fadeOut')}
+            return { modalClass: state.modalClass.replace('show', 'hide').replace('fadeIn', 'fadeOut') }
         })
     }
 
@@ -53,27 +63,28 @@ class Modal extends React.Component {
             cancelClass,
             okText,
             cancelText
-            } = this.props
+        } = this.props
         const headerSection = !!header
             ? header
             : (<div className="modal-header">
-                    <h5 className="modal-title">
-                        {this.props.title}
-                    </h5>
-                    <button type="button" className="close" aria-label="Close">
-                        <i className="fal fa-times">&nbsp;</i>
-                    </button>
-                </div>)
+                <h5 className="modal-title">
+                    {this.props.title}
+                </h5>
+                <button type="button" className="close" aria-label="Close">
+                    <i className="fal fa-times">&nbsp;</i>
+                </button>
+            </div>)
         const footerSection = !!footer
             ? footer
             : (<div className="modal-footer">
-                    {!cancelHidden && <button id="cancelButton" type="button" className={cancelClass} rel="prev">
-                        {cancelText}
-                    </button>}
-                    {!okHidden && <button id="okButton" type="button" className={okClass} rel="next" onClick={this.okHandler}>
-                        {okText}
-                    </button>}
-                </div>)
+                {!cancelHidden && <button id="cancelButton" type="button" className={cancelClass}
+                    rel="prev" onClick={this.cancelHandler}>
+                    {cancelText}
+                </button>}
+                {!okHidden && <button id="okButton" type="button" className={okClass} rel="next" onClick={this.okHandler}>
+                    {okText}
+                </button>}
+            </div>)
         return (
             show && <div>
                 <div className={modalClass} role="dialog" tabIndex="-1" aria-hidden="true">

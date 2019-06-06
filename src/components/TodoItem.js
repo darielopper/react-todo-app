@@ -4,7 +4,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 class TodoItem extends React.Component {
     static defaultProps = {
+        color: { done: '#28a745', default: '#ccc' },
+        title: 'New Task',
+        editMode: false,
+        strikeIt: true
+    }
 
+    static propTypes = {
+        color: React.propTypes.object,
+        title: React.propTypes.string,
+        editMode: React.propTypes.bool,
+        strikeIt: React.propTypes.bool,
+        onChanged: React.propTypes.func
     }
 
     constructor(props) {
@@ -70,7 +81,7 @@ class TodoItem extends React.Component {
     }
 
     render() {
-        const squareColor = this.props.color ? this.props.color : { done: '#28a745', default: '#ccc' }
+        const squareColor = this.props.color
         const icon = this.state.done ? faCheckSquare : faSquare
         const color = this.state.done ? squareColor.done : squareColor.default
         const hasToStrike = this.state.done && this.props.strikeIt

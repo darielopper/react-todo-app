@@ -4,7 +4,7 @@
   "description": "Initial react js ToDo app",
   "main": "index.js",
   "scripts": {
-    "start": "webpack --mode=production",
+    "start": "date /t || echo \"$now\"",
     "build": "webpack -mode production",
     "test": "jest",
     "heroku-postbuild": "webpack --mode=production"

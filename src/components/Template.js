@@ -42,7 +42,7 @@ const Effects = {
     rollOut: 'rollOut',
 }
 
-class Template extends React.Component {
+class Transition extends React.Component {
     static defaultProps = {
         show: false,
         effect: Effects.fadeIn,
@@ -143,4 +143,4 @@ class Template extends React.Component {
     }
 }
 
-export {Template, Effects}
+export {Transition, Effects}

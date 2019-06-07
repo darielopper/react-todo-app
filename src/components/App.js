@@ -4,7 +4,7 @@ import { faCode, faHome, faEdit, faClock } from "@fortawesome/free-solid-svg-ico
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import TodoItem from "./TodoItem"
 import Card from "./Card"
-import {Template, Effects} from "./Template"
+import {Transition, Effects} from "./Transition"
 import { initClassHandler, timeAgoValue } from "../utils"
 
 library.add(faCode, faHome)

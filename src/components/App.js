@@ -21,7 +21,9 @@ class App extends React.Component {
                     { title: 'Detergente para lavar', strikeIt: true }
                 ]
             },
-            showTemplate: true
+            syncData: null,
+            showTemplate: true,
+            showParent: true
         }
 
         this.addTask = this.addTask.bind(this)
@@ -60,12 +62,6 @@ class App extends React.Component {
         }, 60000);
     }
 
-    toggleTemplate = () => {
-        this.setState(state => {
-            return { showTemplate: !state.showTemplate }
-        })
-    }
-
     render() {
         const { cardCss, addTaskClassName, diff } = this.state
         const timeEllapsed = !diff ? 'Recently' : diff + ' min ago'
@@ -101,12 +97,7 @@ class App extends React.Component {
         )
         return (
             <div>
-                <Template show={this.state.showTemplate} effect={Effects.fadeIn}>
-                    <div className="container">
-                        <a className="btn btn-info">Probando</a>
-                    </div>
-                </Template>
-                <a className="btn btn-danger" onClick={this.toggleTemplate}>Toogle</a>
+                {container}
             </div>
         )
     }

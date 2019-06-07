@@ -45,7 +45,9 @@ const Effects = {
 class Template extends React.Component {
     static defaultProps = {
         show: false,
-        effect: 'fade'
+        effect: Effects.fadeIn,
+        onShow: () => {},
+        onHide: () => {}
     }
 
     static propTypes = {
@@ -53,7 +55,9 @@ class Template extends React.Component {
         effect: propTypes.oneOfType([
             propTypes.string,
             propTypes.object
-        ])
+        ]),
+        onShow: propTypes.func,
+        onHide: propTypes.func
     }
 
     state = {
@@ -107,9 +111,11 @@ class Template extends React.Component {
     updateAnimation = () => {
         this.setState(state => {
             const opposite = this.opposite(this.splitCamelCase(this.props.effect).pop())
+            const {inSync} = this.props
             const effect = typeof this.props.effect === 'string'
                 ? { in: this.props.effect, out: !!opposite ? this.obtainOutEffect(opposite) : 'fadeOut' }
                 : this.props.effect
+
             const whichOne = this.props.show ? effect.in : effect.out
             return {
                 divClass: `animated ${whichOne}`
@@ -120,6 +126,7 @@ class Template extends React.Component {
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.show !== this.props.show) {
             this.updateAnimation()
+            this.props.show ? setTimeout(this.props.onShow(), 250) : setTimeout(this.props.onHide(), 250)
         }
     }
 

@@ -4,6 +4,7 @@ import { faCode, faHome, faEdit, faClock } from "@fortawesome/free-solid-svg-ico
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import TodoItem from "./TodoItem"
 import Card from "./Card"
+import {Template, Effects} from "./Template"
 import { initClassHandler, timeAgoValue } from "../utils"
 
 library.add(faCode, faHome)
@@ -19,7 +20,8 @@ class App extends React.Component {
                 compra_nueva: [
                     { title: 'Detergente para lavar', strikeIt: true }
                 ]
-            }
+            },
+            showTemplate: true
         }
 
         this.addTask = this.addTask.bind(this)
@@ -58,11 +60,17 @@ class App extends React.Component {
         }, 60000);
     }
 
+    toggleTemplate = () => {
+        this.setState(state => {
+            return { showTemplate: !state.showTemplate }
+        })
+    }
+
     render() {
         const { cardCss, addTaskClassName, diff } = this.state
         const timeEllapsed = !diff ? 'Recently' : diff + ' min ago'
         const todoData = this.state.todo
-        return (
+        const container = (
             <div className="container">
                 <h1>Hello World, from React App!!</h1>
                 <button className="btn btn-info"><FontAwesomeIcon icon="home" /> Okey</button>
@@ -89,6 +97,16 @@ class App extends React.Component {
                     <Card category={item.ucWords()} key={item}
                         tasks={todoData[item]} onRemove={() => this.removeCard(item)} />
                 )}
+            </div>
+        )
+        return (
+            <div>
+                <Template show={this.state.showTemplate} effect={Effects.fadeIn}>
+                    <div className="container">
+                        <a className="btn btn-info">Probando</a>
+                    </div>
+                </Template>
+                <a className="btn btn-danger" onClick={this.toggleTemplate}>Toogle</a>
             </div>
         )
     }

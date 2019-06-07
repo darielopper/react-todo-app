@@ -5,6 +5,7 @@ module.exports = {
     entry: path.join(__dirname, '/src/index.js'),
     output: {
         filename: 'build.js',
+        publicPath: '',
         path: path.join(__dirname, '/dist')
     },
     module: {
